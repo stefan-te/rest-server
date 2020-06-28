@@ -1,0 +1,2 @@
+INSERT INTO user (login, password, fname, lname, email) VALUES ('alex95', 'password', 'alex', 'winter', 'alex95@web.de');
+INSERT INTO user (login, password, fname, lname, email) VALUES ('monika', 'test123', 'monika', 'sommer', 'moni@yahoo.de');
