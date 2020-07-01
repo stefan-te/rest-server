@@ -1,4 +1,4 @@
-CREATE TABLE `user` (
+CREATE TABLE IF NOT EXISTS `user` (
                         `id` int(4) unsigned NOT NULL AUTO_INCREMENT,
                         `login` varchar(50) COLLATE latin1_german2_ci DEFAULT NULL,
                         `password` varchar(50) COLLATE latin1_german2_ci DEFAULT
@@ -13,7 +13,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=latin1
   COLLATE=latin1_german2_ci;
 
-CREATE TABLE `role` (
+CREATE TABLE IF NOT EXISTS `role` (
                         `id` int(3) unsigned NOT NULL AUTO_INCREMENT,
                         `user_id` int(4) unsigned NOT NULL DEFAULT '0',
                         `role_admin` tinyint(1) unsigned NOT NULL DEFAULT '0',
