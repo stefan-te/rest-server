@@ -1,15 +1,15 @@
 CREATE TABLE IF NOT EXISTS `user` (
-                        `id` int(4) unsigned NOT NULL AUTO_INCREMENT,
-                        `login` varchar(50) COLLATE latin1_german2_ci DEFAULT NULL,
-                        `password` varchar(50) COLLATE latin1_german2_ci DEFAULT
-                                                                          NULL,
-                        `fname` varchar(50) COLLATE latin1_german2_ci DEFAULT NULL,
-                        `lname` varchar(50) COLLATE latin1_german2_ci DEFAULT NULL,
-                        `email` varchar(100) COLLATE latin1_german2_ci DEFAULT NULL,
-                        PRIMARY KEY (`id`),
-                        UNIQUE KEY `uni_login` (`login`),
-                        UNIQUE KEY `uni_email` (`email`),
-                        UNIQUE KEY `uni_fname_lname` (`fname`,`lname`)
+                                      `id` int(4) unsigned NOT NULL AUTO_INCREMENT,
+                                      `login` varchar(50) COLLATE latin1_german2_ci DEFAULT NULL,
+                                      `password` varchar(60) COLLATE latin1_german2_ci DEFAULT
+                                                                                           NULL,
+                                      `fname` varchar(50) COLLATE latin1_german2_ci DEFAULT NULL,
+                                      `lname` varchar(50) COLLATE latin1_german2_ci DEFAULT NULL,
+                                      `email` varchar(100) COLLATE latin1_german2_ci DEFAULT NULL,
+                                      PRIMARY KEY (`id`),
+                                      UNIQUE KEY `uni_login` (`login`),
+                                      UNIQUE KEY `uni_email` (`email`),
+                                      UNIQUE KEY `uni_fname_lname` (`fname`,`lname`)
 ) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=latin1
   COLLATE=latin1_german2_ci;
 
