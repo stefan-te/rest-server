@@ -1,6 +1,4 @@
-package de.internetx.restserver.auth;
-
-import de.internetx.restserver.User;
+package de.internetx.restserver.user;
 
 
 public interface UserRepository {

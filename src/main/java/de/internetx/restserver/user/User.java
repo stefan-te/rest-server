@@ -1,4 +1,4 @@
-package de.internetx.restserver;
+package de.internetx.restserver.user;
 
 public class User {
 

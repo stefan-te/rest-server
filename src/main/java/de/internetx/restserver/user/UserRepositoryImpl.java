@@ -1,6 +1,5 @@
-package de.internetx.restserver.auth;
+package de.internetx.restserver.user;
 
-import de.internetx.restserver.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
