@@ -1,21 +1,19 @@
 package de.internetx.restserver.auth;
 
 import de.internetx.restserver.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-
-import javax.persistence.EntityManager;
 
 import static de.internetx.restserver.Constants.*;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository {
 
-    private final EntityManager entityManager;
     private final JdbcTemplate jdbcTemplate;
 
-    public UserRepositoryImpl(EntityManager entityManager, JdbcTemplate jdbcTemplate) {
-        this.entityManager = entityManager;
+    @Autowired
+    public UserRepositoryImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
@@ -29,7 +27,7 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public int updateUser(User user) {
         return jdbcTemplate.update(UPDATE_USER_QUERY,
-                user.getLogin(), user.getPassword(), user.getFname(), user.getLname(), user.getLogin(), user.getId());
+                user.getLogin(), user.getPassword(), user.getFname(), user.getLname(), user.getEmail(), user.getId());
     }
 
     @Override
