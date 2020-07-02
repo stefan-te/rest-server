@@ -38,7 +38,7 @@ public class UserService {
 
     public User getUser(String id) {
         log.info("Get user");
-        return userRepository.getUser(Long.valueOf(id));
+        return userRepository.getUserById(Long.valueOf(id));
     }
 
     public String deleteUser(String id) {
