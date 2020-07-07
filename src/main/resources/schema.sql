@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS `user` (
                                       `id` int(4) unsigned NOT NULL AUTO_INCREMENT,
                                       `login` varchar(50) COLLATE latin1_german2_ci DEFAULT NULL,
-                                      `password` varchar(60) COLLATE latin1_german2_ci DEFAULT
+                                      `password` varchar(100) COLLATE latin1_german2_ci DEFAULT
                                                                                            NULL,
                                       `fname` varchar(50) COLLATE latin1_german2_ci DEFAULT NULL,
                                       `lname` varchar(50) COLLATE latin1_german2_ci DEFAULT NULL,
