@@ -21,7 +21,6 @@ public class UserRepositoryImpl implements UserRepository {
     public int createUser(User user) {
         return jdbcTemplate.update(Constants.INSERT_USER_QUERY,
                 user.getLogin(), user.getPassword(), user.getFname(), user.getLname(), user.getEmail());
-        // TODO: 01.07.20 insert role entry
     }
 
     @Override
@@ -51,11 +50,15 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public AuthUser getUserByLogin(String login) {
-        return jdbcTemplate.queryForObject(Constants.GET_USER_BY_LOGIN_QUERY, new Object[]{login}, (resultSet, i) -> {
-            AuthUser authUser = new AuthUser();
-            authUser.setLogin(resultSet.getString("login"));
-            authUser.setPassword(resultSet.getString("password"));
-            return authUser;
+        return jdbcTemplate.query(Constants.GET_USER_BY_LOGIN_QUERY, new Object[]{login}, (resultSet) -> {
+            if (resultSet.next()) {
+                AuthUser authUser = new AuthUser();
+                authUser.setId(resultSet.getLong("id"));
+                authUser.setLogin(resultSet.getString("login"));
+                authUser.setPassword(resultSet.getString("password"));
+                return authUser;
+            }
+            return null;
         });
     }
 }

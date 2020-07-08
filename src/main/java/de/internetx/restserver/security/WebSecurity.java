@@ -31,7 +31,10 @@ public class WebSecurity {
         protected void configure(HttpSecurity http) throws Exception {
             http.csrf().disable()
                     .antMatcher("/login")
-                    .httpBasic();
+                    .httpBasic()
+                    .and()
+                    .sessionManagement()
+                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         }
 
         @Override
@@ -59,7 +62,8 @@ public class WebSecurity {
                     .anyRequest().authenticated()
                     .and()
                     .addFilter(new JWTAuthorizationFilter(authenticationManager()))
-                    .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                    .sessionManagement()
+                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         }
 
         @Override

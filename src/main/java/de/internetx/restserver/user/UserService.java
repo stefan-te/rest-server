@@ -1,6 +1,7 @@
 package de.internetx.restserver.user;
 
 import de.internetx.restserver.RestServerApplication;
+import de.internetx.restserver.RoleRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +13,11 @@ public class UserService {
 
     private static final Logger log = LoggerFactory.getLogger(RestServerApplication.class);
 
-    private final UserRepositoryImpl userRepository;
+    private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public UserService(UserRepositoryImpl userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public UserService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userRepository = userRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
@@ -25,6 +26,7 @@ public class UserService {
         log.info("Create user");
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepository.createUser(user);
+        // TODO: 01.07.20 insert role entry
         return user.toString();
     }
 
