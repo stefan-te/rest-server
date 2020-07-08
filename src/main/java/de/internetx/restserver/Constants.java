@@ -9,10 +9,10 @@ public interface Constants {
     String GET_USER_BY_ID_QUERY = "SELECT * FROM user WHERE user.id = ?;";
     String DELETE_USER_QUERY = "DELETE FROM user WHERE user.id = ?;";
     String GET_USER_BY_LOGIN_QUERY = "SELECT id, login, password FROM user WHERE user.login = ?;";
-    String GET_ROLES_BY_ID_QUERY = "SELECT role_admin, role_develop, role_cctld, role_gtld, role_billing, role_registry," +
+    String GET_ROLES_BY_USER_ID_QUERY = "SELECT role_admin, role_develop, role_cctld, role_gtld, role_billing, role_registry," +
             " role_purchase_read, role_purchase_write, role_sale_write, role_sql FROM role WHERE user_id = ?;";
     String INSERT_ROLE__QUERY = "INSERT INTO role (user_id, role_admin, role_develop, role_cctld, role_gtld, role_billing, " +
-            "role_registry, role_purchase_read, role_purchase_write, role_sale_write, role_sql) VALUES (?, ?, ?. ?, ?, ?, ?, ?, ?. ?, ?);";
+            "role_registry, role_purchase_read, role_purchase_write, role_sale_write, role_sql) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
     String[] ROLES = new String[]{"role_admin", "role_develop", "role_cctld", "role_gtld", "role_billing",
             "role_registry", "role_purchase_read", "role_purchase_write", "role_sale_write", "role_sql"};
 

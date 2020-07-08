@@ -61,4 +61,14 @@ public class UserRepositoryImpl implements UserRepository {
             return null;
         });
     }
+
+    @Override
+    public Long getUserIdByLogin(String login) {
+        return jdbcTemplate.query(Constants.GET_USER_BY_LOGIN_QUERY, new Object[]{login}, (resultSet) -> {
+            if (resultSet.next()) {
+                return resultSet.getLong("id");
+            }
+            return null;
+        });
+    }
 }

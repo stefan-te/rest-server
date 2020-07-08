@@ -2,6 +2,7 @@ package de.internetx.restserver.security;
 
 import de.internetx.restserver.RoleRepository;
 import de.internetx.restserver.user.UserRepository;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,9 +30,16 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throw new UsernameNotFoundException(login);
         }
 
-        // get authorities
-        ArrayList<GrantedAuthority> authorities = roleRepository.getRoles(authUser.getId());
+        return new User(authUser.getLogin(), authUser.getPassword(), getAuthorities(authUser.getId()));
+    }
 
-        return new User(authUser.getLogin(), authUser.getPassword(), authorities);
+    public UsernamePasswordAuthenticationToken getToken(String user) {
+        Long userId = userRepository.getUserIdByLogin(user);
+
+        return new UsernamePasswordAuthenticationToken(user, null, getAuthorities(userId));
+    }
+
+    private ArrayList<GrantedAuthority> getAuthorities(Long userId) {
+        return roleRepository.getRolesById(userId);
     }
 }

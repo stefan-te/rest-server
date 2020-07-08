@@ -20,8 +20,8 @@ public class RoleRepositoryImpl implements RoleRepository {
 
 
     @Override
-    public ArrayList<GrantedAuthority> getRoles(Long userId) {
-        return jdbcTemplate.query(Constants.GET_ROLES_BY_ID_QUERY, new Object[]{userId}, resultSet -> {
+    public ArrayList<GrantedAuthority> getRolesById(Long userId) {
+        return jdbcTemplate.query(Constants.GET_ROLES_BY_USER_ID_QUERY, new Object[]{userId}, resultSet -> {
             if (resultSet.next()) {
                 ArrayList<GrantedAuthority> authorities = new ArrayList<>();
                 for (int i = 0; i < Constants.ROLES.length; i++) {
@@ -39,6 +39,6 @@ public class RoleRepositoryImpl implements RoleRepository {
 
     @Override
     public void insertRole(Long userId) {
-        jdbcTemplate.update(Constants.INSERT_USER_QUERY, userId, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        jdbcTemplate.update(Constants.INSERT_ROLE__QUERY, userId, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     }
 }

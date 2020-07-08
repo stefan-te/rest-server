@@ -14,19 +14,24 @@ public class UserService {
     private static final Logger log = LoggerFactory.getLogger(RestServerApplication.class);
 
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public UserService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public UserService(UserRepository userRepository, RoleRepository roleRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     public String createUser(User user) {
         log.info("Create user");
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        userRepository.createUser(user);
-        // TODO: 01.07.20 insert role entry
+        int success = userRepository.createUser(user);
+        if (success > 0) {
+            Long userId = userRepository.getUserIdByLogin(user.getLogin());
+            roleRepository.insertRole(userId);
+        }
         return user.toString();
     }
 
