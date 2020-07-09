@@ -1,4 +1,4 @@
-package de.internetx.restserver.security;
+package de.internetx.restserver.login;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;

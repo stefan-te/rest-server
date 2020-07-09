@@ -1,4 +1,4 @@
-package de.internetx.restserver.user;
+package de.internetx.restserver.models;
 
 import de.internetx.restserver.Constants;
 import org.springframework.beans.factory.annotation.Autowired;

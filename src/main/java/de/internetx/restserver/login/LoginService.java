@@ -1,4 +1,4 @@
-package de.internetx.restserver.security;
+package de.internetx.restserver.login;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;

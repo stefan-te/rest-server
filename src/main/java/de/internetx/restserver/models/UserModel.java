@@ -1,4 +1,4 @@
-package de.internetx.restserver.user;
+package de.internetx.restserver.models;
 
 public class UserModel {
 

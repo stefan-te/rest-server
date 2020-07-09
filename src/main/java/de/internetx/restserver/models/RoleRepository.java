@@ -1,4 +1,4 @@
-package de.internetx.restserver;
+package de.internetx.restserver.models;
 
 import org.springframework.security.core.GrantedAuthority;
 

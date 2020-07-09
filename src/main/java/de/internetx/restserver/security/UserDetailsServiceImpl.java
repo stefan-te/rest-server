@@ -1,8 +1,8 @@
 package de.internetx.restserver.security;
 
-import de.internetx.restserver.RoleRepository;
-import de.internetx.restserver.user.UserModel;
-import de.internetx.restserver.user.UserRepository;
+import de.internetx.restserver.models.RoleRepository;
+import de.internetx.restserver.models.UserModel;
+import de.internetx.restserver.models.UserRepository;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;

@@ -1,6 +1,6 @@
 package de.internetx.restserver.security;
 
-import de.internetx.restserver.RoleRepository;
+import de.internetx.restserver.models.RoleRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;

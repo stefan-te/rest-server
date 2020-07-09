@@ -1,7 +1,9 @@
 package de.internetx.restserver.user;
 
 import de.internetx.restserver.RestServerApplication;
-import de.internetx.restserver.RoleRepository;
+import de.internetx.restserver.models.RoleRepository;
+import de.internetx.restserver.models.UserModel;
+import de.internetx.restserver.models.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

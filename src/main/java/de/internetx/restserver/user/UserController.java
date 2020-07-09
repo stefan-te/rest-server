@@ -1,5 +1,6 @@
 package de.internetx.restserver.user;
 
+import de.internetx.restserver.models.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;

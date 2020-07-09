@@ -1,5 +1,6 @@
-package de.internetx.restserver;
+package de.internetx.restserver.models;
 
+import de.internetx.restserver.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.core.GrantedAuthority;
