@@ -53,12 +53,10 @@ public class WebSecurity {
 
         private final UserDetailsServiceImpl userDetailsService;
         private final BCryptPasswordEncoder bCryptPasswordEncoder;
-        private final RoleRepository roleRepository;
 
         public UserWebSecurityConfigurerAdapter(UserDetailsServiceImpl userDetailsService, BCryptPasswordEncoder bCryptPasswordEncoder, RoleRepository roleRepository) {
             this.userDetailsService = userDetailsService;
             this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-            this.roleRepository = roleRepository;
         }
 
         @Override

@@ -29,6 +29,11 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    public int deleteUser(Long id) {
+        return jdbcTemplate.update(Constants.DELETE_USER_QUERY, id);
+    }
+
+    @Override
     public UserModel getUserById(Long id) {
         return jdbcTemplate.query(Constants.GET_USER_BY_ID_QUERY, new Object[]{id}, (resultSet) -> {
             if (resultSet.next()) {
@@ -43,11 +48,6 @@ public class UserRepositoryImpl implements UserRepository {
             }
             return null;
         });
-    }
-
-    @Override
-    public int deleteUser(Long id) {
-        return jdbcTemplate.update(Constants.DELETE_USER_QUERY, id);
     }
 
     @Override

@@ -40,6 +40,6 @@ public class RoleRepositoryImpl implements RoleRepository {
 
     @Override
     public void insertRole(Long userId) {
-        jdbcTemplate.update(Constants.INSERT_ROLE__QUERY, userId, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        jdbcTemplate.update(Constants.INSERT_ROLE_QUERY, userId, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     }
 }

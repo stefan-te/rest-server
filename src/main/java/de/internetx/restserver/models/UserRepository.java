@@ -7,9 +7,9 @@ public interface UserRepository {
 
     int updateUser(UserModel userModel);
 
-    UserModel getUserById(Long id);
-
     int deleteUser(Long id);
+
+    UserModel getUserById(Long id);
 
     UserModel getUserByLogin(String login);
 
