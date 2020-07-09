@@ -35,22 +35,22 @@ public class UserService {
         return user.toString();
     }
 
-    public String updateUser(String id, User user) {
+    public String updateUser(Long id, User user) {
         log.info("Update user");
-        user.setId(Long.parseLong(id));
+        user.setId(id);
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepository.updateUser(user);
         return user.toString();
     }
 
-    public User getUser(String id) {
+    public User getUser(Long id) {
         log.info("Get user");
-        return userRepository.getUserById(Long.valueOf(id));
+        return userRepository.getUserById(id);
     }
 
-    public String deleteUser(String id) {
+    public String deleteUser(Long id) {
         log.info("Delete user");
-        int res = userRepository.deleteUser(Long.valueOf(id));
+        int res = userRepository.deleteUser(id);
         if (res == 0) {
             return "User was not deleted";
         } else {

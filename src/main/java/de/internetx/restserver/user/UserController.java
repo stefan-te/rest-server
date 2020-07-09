@@ -1,7 +1,8 @@
 package de.internetx.restserver.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,19 +22,19 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public String updateUser(@PathVariable String id, @RequestBody User user) {
+    public String updateUser(@PathVariable Long id, @RequestBody User user) {
         return userService.updateUser(id, user);
     }
 
     @GetMapping("/{id}")
-    @Secured("ROLE_ADMIN")
-    public User getUser(@PathVariable String id) {
+    @PreAuthorize(value = "hasRole('ROLE_ADMIN') or authentication.principal.id.equals(#id)")
+    public User getUser(@PathVariable(value = "id") Long id) {
         return userService.getUser(id);
     }
 
 
     @DeleteMapping("/{id}")
-    public String deleteUser(@PathVariable String id) {
+    public String deleteUser(@PathVariable Long id) {
         return userService.deleteUser(id);
     }
 }
