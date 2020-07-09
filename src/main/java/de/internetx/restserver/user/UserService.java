@@ -5,6 +5,8 @@ import de.internetx.restserver.RoleRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -24,37 +26,44 @@ public class UserService {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
-    public String createUser(UserModel userModel) {
+    public ResponseEntity<String> createUser(UserModel userModel) {
         log.info("Create user");
         userModel.setPassword(bCryptPasswordEncoder.encode(userModel.getPassword()));
         int success = userRepository.createUser(userModel);
         if (success > 0) {
             Long userId = userRepository.getUserIdByLogin(userModel.getLogin());
             roleRepository.insertRole(userId);
+            return new ResponseEntity<>("User " + userModel.getLogin() + " created", HttpStatus.CREATED);
         }
-        return userModel.toString();
+        return new ResponseEntity<>("User could not be created", HttpStatus.BAD_REQUEST);
     }
 
-    public String updateUser(Long id, UserModel userModel) {
+    public ResponseEntity<String> updateUser(Long id, UserModel userModel) {
         log.info("Update user");
         userModel.setId(id);
         userModel.setPassword(bCryptPasswordEncoder.encode(userModel.getPassword()));
-        userRepository.updateUser(userModel);
-        return userModel.toString();
-    }
-
-    public UserModel getUser(Long id) {
-        log.info("Get user");
-        return userRepository.getUserById(id);
-    }
-
-    public String deleteUser(Long id) {
-        log.info("Delete user");
-        int res = userRepository.deleteUser(id);
-        if (res == 0) {
-            return "User was not deleted";
-        } else {
-            return "User deleted";
+        int success = userRepository.updateUser(userModel);
+        if (success > 0) {
+            return new ResponseEntity<>("User " + userModel.getLogin() + " updated", HttpStatus.OK);
         }
+        return new ResponseEntity<>("User could not be updated", HttpStatus.BAD_REQUEST);
+    }
+
+    public ResponseEntity<UserModel> getUser(Long id) {
+        log.info("Get user");
+        UserModel userModel = userRepository.getUserById(id);
+        if (userModel != null) {
+            return new ResponseEntity<>(userModel, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    public ResponseEntity<String> deleteUser(Long id) {
+        log.info("Delete user");
+        int success = userRepository.deleteUser(id);
+        if (success > 0) {
+            return new ResponseEntity<>("User deleted", HttpStatus.OK);
+        }
+        return new ResponseEntity<>("User could not be deleted", HttpStatus.BAD_REQUEST);
     }
 }

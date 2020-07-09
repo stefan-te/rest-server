@@ -30,15 +30,18 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public UserModel getUserById(Long id) {
-        return jdbcTemplate.queryForObject(Constants.GET_USER_BY_ID_QUERY, new Object[]{id}, (resultSet, i) -> {
-            UserModel userModel = new UserModel();
-            userModel.setId(resultSet.getLong("id"));
-            userModel.setLogin(resultSet.getString("login"));
-            userModel.setPassword(resultSet.getString("password"));
-            userModel.setFname(resultSet.getString("fname"));
-            userModel.setLname(resultSet.getString("lname"));
-            userModel.setEmail(resultSet.getString("email"));
-            return userModel;
+        return jdbcTemplate.query(Constants.GET_USER_BY_ID_QUERY, new Object[]{id}, (resultSet) -> {
+            if (resultSet.next()) {
+                UserModel userModel = new UserModel();
+                userModel.setId(resultSet.getLong("id"));
+                userModel.setLogin(resultSet.getString("login"));
+                userModel.setPassword(resultSet.getString("password"));
+                userModel.setFname(resultSet.getString("fname"));
+                userModel.setLname(resultSet.getString("lname"));
+                userModel.setEmail(resultSet.getString("email"));
+                return userModel;
+            }
+            return null;
         });
     }
 
