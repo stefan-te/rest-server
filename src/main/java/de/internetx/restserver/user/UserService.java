@@ -24,26 +24,26 @@ public class UserService {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
-    public String createUser(User user) {
+    public String createUser(UserModel userModel) {
         log.info("Create user");
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        int success = userRepository.createUser(user);
+        userModel.setPassword(bCryptPasswordEncoder.encode(userModel.getPassword()));
+        int success = userRepository.createUser(userModel);
         if (success > 0) {
-            Long userId = userRepository.getUserIdByLogin(user.getLogin());
+            Long userId = userRepository.getUserIdByLogin(userModel.getLogin());
             roleRepository.insertRole(userId);
         }
-        return user.toString();
+        return userModel.toString();
     }
 
-    public String updateUser(Long id, User user) {
+    public String updateUser(Long id, UserModel userModel) {
         log.info("Update user");
-        user.setId(id);
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        userRepository.updateUser(user);
-        return user.toString();
+        userModel.setId(id);
+        userModel.setPassword(bCryptPasswordEncoder.encode(userModel.getPassword()));
+        userRepository.updateUser(userModel);
+        return userModel.toString();
     }
 
-    public User getUser(Long id) {
+    public UserModel getUser(Long id) {
         log.info("Get user");
         return userRepository.getUserById(id);
     }

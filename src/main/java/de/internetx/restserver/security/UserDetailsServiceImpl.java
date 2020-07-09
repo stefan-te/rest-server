@@ -1,6 +1,7 @@
 package de.internetx.restserver.security;
 
 import de.internetx.restserver.RoleRepository;
+import de.internetx.restserver.user.UserModel;
 import de.internetx.restserver.user.UserRepository;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
@@ -25,18 +26,19 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        AuthUser authUser = userRepository.getUserByLogin(login);
-        if (authUser == null) {
+        UserModel userModel = userRepository.getUserByLogin(login);
+        if (userModel == null) {
             throw new UsernameNotFoundException(login);
         }
 
-        return new User(authUser.getLogin(), authUser.getPassword(), getAuthorities(authUser.getId()));
+        return new User(userModel.getLogin(), userModel.getPassword(), getAuthorities(userModel.getId()));
     }
 
-    public UsernamePasswordAuthenticationToken getToken(String user) {
-        Long userId = userRepository.getUserIdByLogin(user);
+    public UsernamePasswordAuthenticationToken getToken(String login) {
+        Long userId = userRepository.getUserIdByLogin(login);
+        UserModel userModel = userRepository.getUserById(userId);
 
-        return new UsernamePasswordAuthenticationToken(user, null, getAuthorities(userId));
+        return new UsernamePasswordAuthenticationToken(userModel, null, getAuthorities(userId));
     }
 
     private ArrayList<GrantedAuthority> getAuthorities(Long userId) {

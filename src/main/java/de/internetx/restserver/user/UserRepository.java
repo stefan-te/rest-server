@@ -1,19 +1,17 @@
 package de.internetx.restserver.user;
 
 
-import de.internetx.restserver.security.AuthUser;
-
 public interface UserRepository {
 
-    int createUser(User user);
+    int createUser(UserModel userModel);
 
-    int updateUser(User user);
+    int updateUser(UserModel userModel);
 
-    User getUserById(Long id);
+    UserModel getUserById(Long id);
 
     int deleteUser(Long id);
 
-    AuthUser getUserByLogin(String login);
+    UserModel getUserByLogin(String login);
 
     Long getUserIdByLogin(String login);
 }

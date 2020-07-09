@@ -1,31 +1,22 @@
 package de.internetx.restserver.user;
 
-public class User {
+public class UserModel {
 
-    private long id;
+    private Long id;
     private String login;
     private String password;
     private String fname;
     private String lname;
     private String email;
 
-    public User() {
-    }
-
-    public User(long id, String login, String password, String fname, String lname, String email) {
-        this.id = id;
-        this.login = login;
-        this.password = password;
-        this.fname = fname;
-        this.lname = lname;
-        this.email = email;
+    public UserModel() {
     }
 
     public long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

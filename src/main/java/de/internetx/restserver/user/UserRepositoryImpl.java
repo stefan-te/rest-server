@@ -1,7 +1,6 @@
 package de.internetx.restserver.user;
 
 import de.internetx.restserver.Constants;
-import de.internetx.restserver.security.AuthUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -18,28 +17,28 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public int createUser(User user) {
+    public int createUser(UserModel userModel) {
         return jdbcTemplate.update(Constants.INSERT_USER_QUERY,
-                user.getLogin(), user.getPassword(), user.getFname(), user.getLname(), user.getEmail());
+                userModel.getLogin(), userModel.getPassword(), userModel.getFname(), userModel.getLname(), userModel.getEmail());
     }
 
     @Override
-    public int updateUser(User user) {
+    public int updateUser(UserModel userModel) {
         return jdbcTemplate.update(Constants.UPDATE_USER_QUERY,
-                user.getLogin(), user.getPassword(), user.getFname(), user.getLname(), user.getEmail(), user.getId());
+                userModel.getLogin(), userModel.getPassword(), userModel.getFname(), userModel.getLname(), userModel.getEmail(), userModel.getId());
     }
 
     @Override
-    public User getUserById(Long id) {
+    public UserModel getUserById(Long id) {
         return jdbcTemplate.queryForObject(Constants.GET_USER_BY_ID_QUERY, new Object[]{id}, (resultSet, i) -> {
-            User user = new User();
-            user.setId(resultSet.getLong("id"));
-            user.setLogin(resultSet.getString("login"));
-            user.setPassword(resultSet.getString("password"));
-            user.setFname(resultSet.getString("fname"));
-            user.setLname(resultSet.getString("lname"));
-            user.setEmail(resultSet.getString("email"));
-            return user;
+            UserModel userModel = new UserModel();
+            userModel.setId(resultSet.getLong("id"));
+            userModel.setLogin(resultSet.getString("login"));
+            userModel.setPassword(resultSet.getString("password"));
+            userModel.setFname(resultSet.getString("fname"));
+            userModel.setLname(resultSet.getString("lname"));
+            userModel.setEmail(resultSet.getString("email"));
+            return userModel;
         });
     }
 
@@ -49,14 +48,14 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public AuthUser getUserByLogin(String login) {
+    public UserModel getUserByLogin(String login) {
         return jdbcTemplate.query(Constants.GET_USER_BY_LOGIN_QUERY, new Object[]{login}, (resultSet) -> {
             if (resultSet.next()) {
-                AuthUser authUser = new AuthUser();
-                authUser.setId(resultSet.getLong("id"));
-                authUser.setLogin(resultSet.getString("login"));
-                authUser.setPassword(resultSet.getString("password"));
-                return authUser;
+                UserModel userModel = new UserModel();
+                userModel.setId(resultSet.getLong("id"));
+                userModel.setLogin(resultSet.getString("login"));
+                userModel.setPassword(resultSet.getString("password"));
+                return userModel;
             }
             return null;
         });

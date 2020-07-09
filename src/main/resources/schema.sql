@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS `user` (
+CREATE TABLE IF NOT EXISTS `userModel` (
                                       `id` int(4) unsigned NOT NULL AUTO_INCREMENT,
                                       `login` varchar(50) COLLATE latin1_german2_ci DEFAULT NULL,
                                       `password` varchar(100) COLLATE latin1_german2_ci DEFAULT
@@ -31,6 +31,6 @@ CREATE TABLE IF NOT EXISTS `role` (
                         PRIMARY KEY (`id`),
                         UNIQUE KEY `UNI_user_id` (`user_id`),
                         CONSTRAINT `constr_role_user` FOREIGN KEY (`user_id`)
-                            REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+                            REFERENCES `userModel` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=102 DEFAULT CHARSET=latin1
   COLLATE=latin1_german2_ci;

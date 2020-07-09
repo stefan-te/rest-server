@@ -22,8 +22,6 @@ public class LoginController {
     @PostMapping("/login")
     public String loginUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        auth.isAuthenticated();
-        log.info(String.valueOf(auth.isAuthenticated()));
         String token = JWT.create()
                 .withSubject(((User) auth.getPrincipal()).getUsername())
                 .withExpiresAt(new Date(System.currentTimeMillis() + Constants.EXPIRATION_DATE))
