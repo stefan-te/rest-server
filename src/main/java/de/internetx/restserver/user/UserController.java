@@ -22,18 +22,20 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize(value = "hasAnyRole('ROLE_ADMIN', 'ROLE_DEVELOP', 'ROLE_REGISTRY', 'ROLE_SQL') or authentication.principal.id.equals(#id)")
     public ResponseEntity<String> updateUser(@PathVariable Long id, @RequestBody UserModel userModel) {
         return userService.updateUser(id, userModel);
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize(value = "hasRole('ROLE_ADMIN') or authentication.principal.id.equals(#id)")
+    @PreAuthorize(value = "hasAnyRole('ROLE_ADMIN', 'ROLE_DEVELOP', 'ROLE_REGISTRY', 'ROLE_SQL') or authentication.principal.id.equals(#id)")
     public ResponseEntity<UserModel> getUser(@PathVariable(value = "id") Long id) {
         return userService.getUser(id);
     }
 
 
     @DeleteMapping("/{id}")
+    @PreAuthorize(value = "hasRole('ROLE_ADMIN')")
     public ResponseEntity<String> deleteUser(@PathVariable Long id) {
         return userService.deleteUser(id);
     }
